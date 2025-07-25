@@ -22,10 +22,14 @@ const styling = function (curState) {
     document.querySelector('.number').textContent = '?';
     document.querySelector('body').style.backgroundColor = '#222';
     document.querySelector('.number').style.width = '15rem';
-    message.textContent = 'Start guessing...';
+    display('Start guessing...');
     document.querySelector('.guess').value = '';
     document.querySelector('.score').textContent = score;
   }
+};
+//function for displaying the message
+const display = function (messageText) {
+  message.textContent = messageText;
 };
 // function for handling the again state
 const again = function () {
@@ -41,7 +45,7 @@ const check = function () {
 
     if (!guess) {
       //when there is no innput
-      message.textContent = '⛔  No Number!';
+      display('⛔ No Number!');
     }
     // when player wins
     else if (guess === secNumber) {
@@ -50,7 +54,7 @@ const check = function () {
       }
       state = 'win';
       styling(state);
-      message.textContent = '🎉 Correct Number!';
+      display('🎉 Correct Number!');
     }
     // when player lose
     else if (guess !== secNumber) {
@@ -58,20 +62,16 @@ const check = function () {
         score--;
         document.querySelector('.score').textContent = score;
         if (guess > secNumber) {
-          message.textContent = `${
-            guess - secNumber >= 5 ? '📈Too high' : 'High'
-          }`;
+          display(`${guess - secNumber >= 5 ? '📈Too high' : 'High'}`);
         } else if (guess < secNumber) {
-          message.textContent = `${
-            secNumber - guess >= 5 ? '📉Too low' : 'Low'
-          }`;
+          display(`${secNumber - guess >= 5 ? '📉Too low' : 'Low'}`);
         }
       } else {
         again();
       }
     }
   } else {
-    message.textContent = 'You lost!';
+    display('You lost!');
     state = 'lose';
     again();
   }
