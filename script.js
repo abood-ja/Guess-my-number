@@ -6,11 +6,14 @@ let score = 20;
 const checkBtn = document.querySelector('.check');
 const againBtn = document.querySelector('.again');
 let state = '';
+let highScore = 0;
+
 const again = function () {
+  state = '';
   secNumber = Math.trunc(Math.random() * 20) + 1;
   score = 20;
   document.querySelector('.number').style.width = '15rem';
-  document.querySelector('body').style.backgroundColor = '#333';
+  document.querySelector('body').style.backgroundColor = '#222';
   message.textContent = 'Start guessing...';
   document.querySelector('.score').textContent = score;
   document.querySelector('.guess').value = '';
@@ -27,6 +30,9 @@ checkBtn.addEventListener('click', function () {
     }
     // when player wins
     else if (guess === secNumber) {
+      if (score > Number(document.querySelector('.highscore').textContent)) {
+        document.querySelector('.highscore').textContent = score;
+      }
       document.querySelector('.number').textContent = secNumber;
       document.querySelector('body').style.backgroundColor = '#60b347';
       document.querySelector('.number').style.width = '30rem';
