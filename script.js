@@ -18,11 +18,18 @@ const again = function () {
 button.addEventListener('click', function () {
   const guess = Number(document.querySelector('.guess').value);
   console.log(guess);
+  //when there is no innput
   if (!guess) {
     message.textContent = '⛔  No Number!';
-  } else if (guess === secNumber) {
+  }
+  // when player wins
+  else if (guess === secNumber) {
+    document.querySelector('body').style.backgroundColor = '#60b347';
+    document.querySelector('.number').style.width = '30rem';
     message.textContent = '🎉 Correct Number!';
-  } else if (guess !== secNumber) {
+  }
+  // when player lose
+  else if (guess !== secNumber) {
     if (score !== 0) {
       score--;
       document.querySelector('.score').textContent = score;
